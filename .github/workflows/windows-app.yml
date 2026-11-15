@@ -44,7 +44,11 @@ jobs:
           Remove-Item (Join-Path $data 'last-url.txt') -ErrorAction SilentlyContinue
           $app = Start-Process -FilePath 'dist-desktop\MarsMap.exe' -PassThru
           $file = Join-Path $data 'last-url.txt'
-          for ($i = 0; $i -lt 60 -and -not (Test-Path $file); $i++) { Start-Sleep -Seconds 1 }
+          for ($i = 0; $i -lt 90 -and -not (Test-Path $file); $i++) { Start-Sleep -Seconds 1 }
+          if (-not (Test-Path $file)) {
+            Get-Content (Join-Path $data 'marsmap.log') -ErrorAction SilentlyContinue
+            throw 'MarsMap.exe did not start its server (log above)'
+          }
           $url = Get-Content $file
           $base = $url -replace '/#map$', ''
           (Invoke-WebRequest "$base/healthz").Content

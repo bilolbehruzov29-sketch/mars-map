@@ -46,8 +46,20 @@ def wait_for(port, timeout=30):
     return False
 
 
+def attach_log(data):
+    """Windowed builds have no console (sys.stdout/stderr are None), which breaks uvicorn's logging.
+    Send all output to %LOCALAPPDATA%\\MarsMap\\marsmap.log instead."""
+    if sys.stdout is None or sys.stderr is None:
+        log = open(data / 'marsmap.log', 'a', encoding='utf-8', buffering=1)
+        if sys.stdout is None:
+            sys.stdout = log
+        if sys.stderr is None:
+            sys.stderr = log
+
+
 def main():
     data = user_data_dir()
+    attach_log(data)
     os.environ.setdefault('MARSMAP_ROOT', str(resource_root()))
     os.environ.setdefault('DEM_CACHE_DIR', str(data / 'dem'))        # 3.7 km elevation grid, downloaded once
     os.environ.setdefault('MARSMAP_ENV_FILE', str(data / 'settings.env'))  # optional GEMINI_API_KEY=...
@@ -81,6 +93,11 @@ def main():
 
 
 if __name__ == '__main__':
-    # Allow "python desktop/app.py" from the spacemap folder.
+    # Allow "python desktop/app.py" from the project folder.
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    main()
+    try:
+        main()
+    except Exception:
+        import traceback
+        traceback.print_exc()   # lands in marsmap.log for windowed builds
+        raise
