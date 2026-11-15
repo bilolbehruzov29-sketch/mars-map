@@ -1,0 +1,24 @@
+# Netlify builds and serves the website (Vite → dist/).
+# The Python server (routes, expeditions, 3D terrain, weather, S.A.M) runs on Render; Netlify forwards
+# /api/* and /healthz to it, so the whole app works on the netlify.app address.
+# If your Render service has a different address (Render → service → URL at the top), change it below.
+# netlify.app sites are accepted by the server automatically; for a custom domain set
+# ALLOWED_ORIGINS=https://your-domain on Render.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://spacemap-mars.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/healthz"
+  to = "https://spacemap-mars.onrender.com/healthz"
+  status = 200
+  force = true

@@ -1,0 +1,456 @@
+.welcome-page {
+    min-height: calc(100svh - 72px);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 85% 70%, #303030 0, transparent 46%), radial-gradient(ellipse at 55% 15%, #26262655, transparent 55%), #101010;
+    padding: 8vh max(6vw, 24px) 88px;
+    align-items: center;
+    gap: 2vw
+}
+
+.welcome-stars {
+    position: absolute;
+    inset: 0;
+    opacity: .55;
+    background-image: radial-gradient(1px 1px at 12% 22%, #d7f4ff 99%, transparent), radial-gradient(1px 1px at 80% 17%, #fff 99%, transparent), radial-gradient(2px 2px at 56% 61%, #9cacc8 99%, transparent), radial-gradient(1px 1px at 33% 83%, #fff 99%, transparent), radial-gradient(1px 1px at 95% 43%, #fff 99%, transparent);
+    background-size: 310px 340px;
+    pointer-events: none
+}
+
+.welcome-copy {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    max-width: 630px
+}
+
+.welcome-kicker {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    font: 10px 'JetBrains Mono', monospace;
+    letter-spacing: 2px;
+    color: #a5b8c9
+}
+
+.welcome-kicker i,
+.alien-id i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #9fe8c9;
+    box-shadow: 0 0 12px #9fe8c988
+}
+
+.welcome-greeting {
+    color: #6bff72;
+    font-size: 18px;
+    margin: 30px 0 12px
+}
+
+.welcome-copy h1 {
+    font-size: clamp(60px, 6.6vw, 102px);
+    font-weight: 600;
+    letter-spacing: -5px;
+    line-height: 1.02;
+    margin: 0 0 25px
+}
+
+.welcome-copy h1 em {
+    font-style: normal;
+    color: #6bff72
+}
+
+.welcome-lead {
+    max-width: 450px;
+    color: #9eacbd;
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 0 0 34px
+}
+
+.explore-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
+    background: #6bff72;
+    border: 1px solid #6bff72;
+    border-radius: 9px;
+    padding: 17px 24px;
+    color: #1c1c1c;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 8px 35px #70ef8a18;
+    transition: transform .2s, background .2s
+}
+
+.explore-button:hover {
+    transform: translateY(-3px);
+    background: #6ef975
+}
+
+.explore-button span {
+    font-size: 24px;
+    line-height: 1
+}
+
+.welcome-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 30px;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    color: #697e92
+}
+
+.welcome-art {
+    flex: 1;
+    min-width: 0;
+    max-width: 560px;
+    position: relative;
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    min-height: 550px
+}
+
+.alien-guide {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 420px);
+    filter: drop-shadow(0 30px 28px #08080899);
+    margin-top: 28px
+}
+
+.alien-float {
+    animation: alienFloat 6s ease-in-out infinite
+}
+
+.alien-wave {
+    transform-origin: 292px 319px;
+    animation: alienWave 4.5s ease-in-out infinite
+}
+
+.alien-eyes {
+    transform-origin: 220px 175px;
+    animation: alienBlink 7s infinite
+}
+
+.welcome-mars {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 35% 30%, #6bff72 0%, #6bff72 27%, #743c30 57%, #282828 77%);
+    box-shadow: inset -65px -25px 70px #101010bb, 0 0 100px #70ef8a20;
+    opacity: .6;
+    right: -120px;
+    top: 20%;
+    z-index: 0
+}
+
+.welcome-mars:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-linear-gradient(166deg, transparent 0 12%, #25252522 15%, transparent 18%), radial-gradient(ellipse at 35% 55%, #50382c80 0 8%, transparent 12%);
+    filter: blur(8px)
+}
+
+.mars-orbit {
+    position: absolute;
+    width: 570px;
+    height: 570px;
+    border: 1px solid #a08c6b22;
+    border-radius: 50%;
+    right: -180px;
+    top: 5%;
+    transform: rotate(-25deg) scaleX(1.15)
+}
+
+.alien-speech {
+    position: absolute;
+    top: 2%;
+    left: 4%;
+    padding: 16px 46px 16px 20px;
+    border: 1px solid #354b55;
+    border-radius: 14px 14px 14px 0;
+    background: #1e1e1ed9;
+    color: #b4e7d4;
+    font-size: 13px;
+    line-height: 1.7;
+    z-index: 3
+}
+
+.alien-speech b {
+    font-weight: 400;
+    color: #95aab9;
+    font-size: 11px
+}
+
+.alien-speech span {
+    position: absolute;
+    right: 17px;
+    top: 18px;
+    color: rgb(159, 234, 156)
+}
+
+.alien-id {
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: 1.5px;
+    color: #a5b8c9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+    z-index: 3
+}
+
+.welcome-footer {
+    position: absolute;
+    left: max(6vw, 24px);
+    right: max(6vw, 24px);
+    bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid #a9c2d216;
+    padding-top: 20px;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    color: #718499
+}
+
+.welcome-footer a {
+    color: #baa895
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #a2f2d0;
+    outline-offset: 4px
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: default
+}
+
+[hidden] {
+    display: none !important
+}
+
+.ai-message {
+    white-space: pre-wrap
+}
+
+.ai-form button:disabled {
+    opacity: .5
+}
+
+.ai-head .eyebrow {
+    font-size: 20px;
+    letter-spacing: 2px
+}
+
+.coordinates-open {
+    white-space: nowrap
+}
+
+@keyframes alienFloat {
+
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-12px)
+    }
+}
+
+@keyframes alienWave {
+
+    0%,
+    60%,
+    100% {
+        transform: rotate(0)
+    }
+
+    12%,
+    36% {
+        transform: rotate(-13deg)
+    }
+
+    24%,
+    48% {
+        transform: rotate(8deg)
+    }
+}
+
+@keyframes alienBlink {
+
+    0%,
+    44%,
+    48%,
+    100% {
+        transform: scaleY(1)
+    }
+
+    46% {
+        transform: scaleY(.05)
+    }
+}
+
+@media(max-width:950px) {
+    .topbar {
+        gap: 20px
+    }
+
+    .topnav {
+        gap: 16px
+    }
+
+    .welcome-page {
+        padding-top: 5vh
+    }
+
+    .welcome-copy h1 {
+        font-size: 70px;
+        letter-spacing: -3px
+    }
+
+    .welcome-art {
+        min-height: 490px
+    }
+
+    .alien-speech {
+        left: 0
+    }
+
+    .welcome-mars {
+        width: 380px;
+        height: 380px
+    }
+
+    .welcome-lead {
+        font-size: 14px
+    }
+}
+
+@media(max-width:700px) {
+    .topbar {
+        height: auto;
+        min-height: 72px;
+        padding: 14px 18px;
+        flex-wrap: wrap;
+        gap: 14px
+    }
+
+    .brand {
+        margin-right: auto
+    }
+
+    .topnav {
+        order: 3;
+        width: 100%;
+        height: 30px;
+        gap: 26px
+    }
+
+    .topnav .nav-link {
+        font-size: 12px
+    }
+
+    .coordinates-open {
+        padding: 8px 10px;
+        margin-left: 0 !important
+    }
+
+    .welcome-page.active {
+        flex-direction: column;
+        padding: 35px 24px 105px;
+        gap: 20px
+    }
+
+    .welcome-copy {
+        width: 100%;
+        max-width: 500px
+    }
+
+    .welcome-copy h1 {
+        font-size: 62px
+    }
+
+    .welcome-greeting {
+        margin-top: 24px
+    }
+
+    .welcome-lead {
+        max-width: 450px;
+        margin-bottom: 24px
+    }
+
+    .welcome-art {
+        width: 100%;
+        max-width: 430px;
+        min-height: 460px;
+        align-self: center
+    }
+
+    .alien-guide {
+        width: 330px
+    }
+
+    .alien-speech {
+        top: 0;
+        left: 0
+    }
+
+    .welcome-mars {
+        right: -150px;
+        top: 17%
+    }
+
+    .alien-id {
+        bottom: 8px
+    }
+
+    .welcome-footer {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 8px
+    }
+
+    .welcome-details {
+        gap: 14px;
+        font-size: 8px
+    }
+
+    .globe-toolbar .eyebrow {
+        max-width: 150px;
+        display: block
+    }
+
+    .view-controls>span {
+        display: none
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .alien-float,
+    .alien-wave,
+    .alien-eyes {
+        animation: none
+    }
+
+    .explore-button {
+        transition: none
+    }
+}

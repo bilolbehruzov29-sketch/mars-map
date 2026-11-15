@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA05315",
+  "coverage": 360,
+  "source": "https://science.nasa.gov/photojournal/spirit-keeps-rolling/",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "spirit",
+  "missionName": "Spirit",
+  "title": "Spirit Keeps Rolling",
+  "date": "2004-02-18",
+  "description": "Spirit Keeps Rolling",
+  "original": "https://images-assets.nasa.gov/image/PIA05315/PIA05315~orig.jpg",
+  "image": "/api/missions/spirit/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}

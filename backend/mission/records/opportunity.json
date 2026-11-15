@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA16122",
+  "coverage": 360,
+  "source": "https://images.nasa.gov/details/PIA16122",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "opportunity",
+  "missionName": "Opportunity",
+  "title": "Opportunity Surroundings on 3,000th Sol",
+  "date": "2012-09-07",
+  "description": "This 3D 360-degree panorama assembled from images taken by the navigation camera on NASA Mars Exporation Rover Opportunity. The Sol 3000 site is near the northern tip of the Cape York segment of the western rim of Endeavour Crater.",
+  "original": "https://images-assets.nasa.gov/image/PIA16122/PIA16122~orig.jpg",
+  "image": "/api/missions/opportunity/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}

@@ -1,0 +1,1052 @@
+
+:root {
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    color: #e9edf5;
+    background: #0e0e0e;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    font-weight: 400
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background: #0e0e0e;
+    color: #e9edf5
+}
+
+button,
+a,
+input {
+    font: inherit
+}
+
+button {
+    color: inherit;
+    cursor: pointer
+}
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+#app {
+    min-height: 100vh
+}
+
+.topbar {
+    height: 72px;
+    border-bottom: 1px solid #2d2d2d;
+    background: #141414;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 48px;
+    position: relative;
+    z-index: 5
+}
+
+.brand {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -.7px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.brand-mark {
+    color: #6bff72;
+    font-size: 24px
+}
+
+.topnav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 100%
+}
+
+.nav-link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: none;
+    color: #8d98ac;
+    font-size: 13px;
+    position: relative;
+    padding: 0 2px
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: #f2f4f8
+}
+
+.nav-link.active:after {
+    content: "";
+    height: 2px;
+    background: #6bff72;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.external-link {
+    margin-left: 4px
+}
+
+.coordinates-open {
+    margin-left: auto;
+    border: 1px solid #594333;
+    background: #211b1a;
+    color: #8dfd93;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700
+}
+
+/* Две кнопки в шапке (ИИ и координаты): auto-отступ только у первой */
+.coordinates-open+.coordinates-open {
+    margin-left: 10px
+}
+
+.coordinates-open span {
+    font-size: 17px;
+    margin-left: 10px
+}
+
+.page {
+    display: none
+}
+
+.page.active {
+    display: flex
+}
+
+.map-page {
+    min-height: calc(100vh - 72px)
+}
+
+.sidebar {
+    width: 294px;
+    flex: 0 0 294px;
+    border-right: 1px solid #2d2d2d;
+    background: #131313;
+    padding: 27px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    /* Карточки данных NASA делают панель выше экрана — даём ей собственную прокрутку */
+    max-height: calc(100vh - 72px);
+    overflow-y: auto
+}
+
+.side-section {
+    margin-bottom: 27px
+}
+
+.section-heading {
+    font: 10px 'JetBrains Mono', monospace;
+    letter-spacing: 1.2px;
+    color: #718097;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.tiny-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #71cdb3
+}
+
+.sidebar h2 {
+    font-size: 16px;
+    margin: 11px 0 15px;
+    letter-spacing: -.4px
+}
+
+.mission {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 10px 9px;
+    background: transparent;
+    color: #aab4c5;
+    margin: 3px 0
+}
+
+.mission:hover,
+.mission.active {
+    background: #202020;
+    border-color: #383838;
+    color: #f4f5f8
+}
+
+.mission-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background: #2e2e2e;
+    border-radius: 7px;
+    color: #84f98a;
+    font-size: 17px
+}
+
+.mission b {
+    display: block;
+    font-size: 12px;
+    font-weight: 700
+}
+
+.mission small {
+    display: block;
+    color: #758198;
+    font-size: 10px;
+    margin-top: 3px
+}
+
+.layer-count {
+    color: #6bff72;
+    font-size: 9px
+}
+
+.side-hint {
+    font-size: 11px;
+    color: #778398;
+    line-height: 1.55;
+    margin: -7px 0 12px
+}
+
+.layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.layer-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 9px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: #aab4c5;
+    text-align: left;
+    font-size: 11px
+}
+
+.layer-button:hover,
+.layer-button.active {
+    background: #242424;
+    border-color: #3c3c3c;
+    color: #f4f5f8
+}
+
+.layer-button kbd {
+    margin-left: auto;
+    color: #69768d;
+    font: 9px 'JetBrains Mono', monospace
+}
+
+.layer-swatch {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: #2ffc3a
+}
+
+.layer-swatch.thermal {
+    background: #70ef8a
+}
+
+.layer-swatch.spectral {
+    background: #398b92
+}
+
+.layer-swatch.topographic {
+    background: #a5b879
+}
+
+.layer-swatch.geophysical {
+    background: #98749a
+}
+
+.layer-swatch.atmospheric {
+    background: #82b7c4
+}
+
+.layer-swatch.radiation {
+    background: #70ef8a
+}
+
+.layer-swatch.chemical {
+    background: #9dbd69
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid #2d2d2d;
+    padding-top: 17px;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: .7px;
+    color: #758198
+}
+
+.status-pulse {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #68c5a7;
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 8px #68c5a7
+}
+
+.globe-area {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 72px);
+    background: radial-gradient(ellipse at 50% 48%, #252525 0%, #141414 46%, #0e0e0e 78%)
+}
+
+.globe-toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 27px 34px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    pointer-events: none
+}
+
+.eyebrow {
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: 1.5px;
+    color: #8290a7
+}
+
+.globe-toolbar h1 {
+    font-size: 28px;
+    letter-spacing: -1.1px;
+    margin: 6px 0
+}
+
+.live-tag {
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: .8px;
+    color: #77cbb2;
+    border: 1px solid #31564f;
+    border-radius: 4px;
+    padding: 4px 6px;
+    vertical-align: middle;
+    margin-left: 7px
+}
+
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #718097;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: .7px;
+    pointer-events: auto
+}
+
+/* Только прямые дети: иначе квадрат 32×32 ломает кнопки 2D/3D внутри .mode-switch */
+.view-controls>button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #344055;
+    background: #1f1f1f;
+    border-radius: 6px;
+    font-size: 19px;
+    color: #c2ccdc
+}
+
+.view-controls>button:hover {
+    border-color: #70ef8a;
+    color: #70ef8a
+}
+
+#globe {
+    width: 100%;
+    height: 100%;
+    min-height: 580px;
+    flex: 1
+}
+
+#globe canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: none
+}
+
+.globe-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 34px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #7e8ba1;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: .5px
+}
+
+.caption-dot {
+    width: 6px;
+    height: 6px;
+    background: #70ef8a;
+    border-radius: 50%
+}
+
+.caption-divider {
+    height: 12px;
+    width: 1px;
+    background: #344055;
+    margin: 0 4px
+}
+
+.coordinate-readout {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    color: #77849a;
+    font: 9px 'JetBrains Mono', monospace;
+    letter-spacing: .6px
+}
+
+.coordinate-readout b {
+    color: #70ef8a;
+    font-weight: 500;
+    margin: 0 4px
+}
+
+.about-page {
+    min-height: calc(100vh - 72px);
+    background: radial-gradient(ellipse at 80% 15%, #292929 0%, #131313 55%);
+    padding: 9vh 10vw
+}
+
+.about-content {
+    max-width: 950px;
+    margin: auto
+}
+
+.about-content h1 {
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.04;
+    letter-spacing: -3px;
+    margin: 22px 0
+}
+
+.about-content h1 em {
+    font-style: normal;
+    color: #70ef8a
+}
+
+.about-lead {
+    max-width: 650px;
+    color: #a6b1c2;
+    font-size: 16px;
+    line-height: 1.8
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 54px 0 26px
+}
+
+.about-grid article {
+    border: 1px solid #393939;
+    background: #1d1d1d;
+    border-radius: 9px;
+    padding: 22px
+}
+
+.about-grid article span {
+    font: 9px 'JetBrains Mono', monospace;
+    color: #70ef8a;
+    letter-spacing: .8px
+}
+
+.about-grid h3 {
+    font-size: 16px;
+    margin: 18px 0 9px
+}
+
+.about-grid p,
+.about-note {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #8c99ad
+}
+
+.about-note {
+    max-width: 760px;
+    margin-bottom: 24px
+}
+
+.primary-button {
+    border: 1px solid #70ef8a;
+    background: #70ef8a;
+    color: #161616;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800
+}
+
+.primary-button span {
+    margin-left: 18px;
+    font-size: 16px
+}
+
+.primary-button:hover {
+    background: #70ef8a
+}
+
+.drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: #060606b3;
+    z-index: 8;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s
+}
+
+.drawer-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto
+}
+
+.coordinate-drawer {
+    position: fixed;
+    z-index: 9;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(410px, 100vw);
+    background: #1c1c1c;
+    border-left: 1px solid #393939;
+    padding: 30px;
+    transform: translateX(102%);
+    transition: transform .28s ease;
+    box-shadow: -20px 0 70px #0005
+}
+
+.coordinate-drawer.open {
+    transform: translateX(0)
+}
+
+.drawer-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.drawer-heading h2 {
+    font-size: 26px;
+    margin: 7px 0
+}
+
+.close-button {
+    border: 1px solid #354156;
+    background: #272727;
+    color: #d7deea;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    font-size: 22px
+}
+
+.drawer-description {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #8f9bb0;
+    margin: 14px 0 30px
+}
+
+.coordinate-drawer label {
+    display: flex;
+    justify-content: space-between;
+    color: #d9dfeb;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 19px 0 9px
+}
+
+.coordinate-drawer label span {
+    font: 9px 'JetBrains Mono', monospace;
+    color: #74839a
+}
+
+.input-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px
+}
+
+.input-pair input {
+    min-width: 0;
+    width: 100%;
+    background: #141414;
+    border: 1px solid #303d52;
+    border-radius: 6px;
+    padding: 12px;
+    color: #eef2f8;
+    outline: none;
+    font-size: 12px
+}
+
+.input-pair input:focus {
+    border-color: #70ef8a
+}
+
+.full-button {
+    width: 100%;
+    margin-top: 27px
+}
+
+.route-result {
+    margin-top: 25px;
+    padding: 15px;
+    border: 1px solid #2d3c50;
+    background: #222222;
+    border-radius: 7px;
+    color: #aab6c9;
+    font-size: 11px;
+    line-height: 1.9
+}
+
+.route-result b {
+    color: #8bd3bc
+}
+
+.drawer-footnote {
+    color: #718097;
+    font-size: 10px;
+    line-height: 1.7;
+    margin-top: 20px
+}
+
+@media(max-width:850px) {
+    .topbar {
+        padding: 0 17px;
+        gap: 22px
+    }
+
+    .topnav {
+        gap: 15px
+    }
+
+    .sidebar {
+        width: 245px;
+        flex-basis: 245px;
+        padding: 22px 14px
+    }
+
+    .globe-toolbar {
+        padding: 22px 20px
+    }
+
+    .globe-caption {
+        left: 20px;
+        bottom: 18px
+    }
+
+    .coordinate-readout {
+        right: 18px;
+        bottom: 18px
+    }
+}
+
+@media(max-width:650px) {
+    .topbar {
+        height: 62px;
+        gap: 14px
+    }
+
+    .brand {
+        font-size: 16px
+    }
+
+    .topnav {
+        gap: 11px
+    }
+
+    .nav-link {
+        font-size: 11px
+    }
+
+    .external-link {
+        display: none
+    }
+
+    .coordinates-open {
+        font-size: 0;
+        padding: 9px 12px
+    }
+
+    .coordinates-open+.coordinates-open {
+        margin-left: 6px
+    }
+
+    .coordinates-open span {
+        font-size: 18px;
+        margin: 0
+    }
+
+    .map-page {
+        min-height: calc(100vh - 62px);
+        flex-direction: column
+    }
+
+    .sidebar {
+        width: 100%;
+        flex: 0 0 auto;
+        border-right: 0;
+        border-bottom: 1px solid #2d2d2d;
+        padding: 14px;
+        display: block;
+        max-height: none;
+        overflow: visible
+    }
+
+    .side-section:first-child {
+        display: none
+    }
+
+    .layers-section {
+        margin: 0
+    }
+
+    /* На телефоне карточку слоя прячем, чтобы не отодвигать глобус */
+    .layers-section .info-card {
+        display: none
+    }
+
+    .sidebar h2 {
+        margin: 7px 0
+    }
+
+    .side-hint,
+    .sidebar-footer {
+        display: none
+    }
+
+    .layer-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3px
+    }
+
+    .layer-button {
+        padding: 7px;
+        font-size: 10px
+    }
+
+    .globe-area {
+        min-height: 550px
+    }
+
+    .globe-toolbar {
+        padding: 18px
+    }
+
+    .globe-toolbar h1 {
+        font-size: 22px
+    }
+
+    .view-controls span {
+        display: none
+    }
+
+    #globe {
+        min-height: 500px
+    }
+
+    .globe-caption {
+        font-size: 8px;
+        bottom: 14px
+    }
+
+    .coordinate-readout {
+        display: none
+    }
+
+    .about-page {
+        padding: 50px 22px
+    }
+
+    .about-content h1 {
+        letter-spacing: -2px
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        margin: 30px 0 20px
+    }
+
+    .about-grid article {
+        padding: 17px
+    }
+}
+
+/* ==========================================
+   Переключатель 2D / 3D
+   ========================================== */
+
+.mode-switch {
+    display: flex;
+    gap: 3px;
+    padding: 3px;
+    background: #1d1d1d;
+    border: 1px solid #344055;
+    border-radius: 6px
+}
+
+.mode-button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: #8290a7;
+    font: 10px 'JetBrains Mono', monospace;
+    cursor: pointer
+}
+
+.mode-button.active {
+    background: #70ef8a;
+    color: #161616
+}
+
+.mode-button:hover:not(.active) {
+    color: white
+}
+
+/* ==========================================
+   Карточки данных NASA (миссии и слои)
+   ========================================== */
+
+.info-card {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border: 1px solid #2d3c50;
+    background: #222222;
+    border-radius: 7px;
+    color: #aab6c9;
+    font-size: 11px;
+    line-height: 1.7
+}
+
+.info-card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: #f4f5f8
+}
+
+.info-card p {
+    margin: 0 0 6px
+}
+
+.info-card ul {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none
+}
+
+.info-card li {
+    padding: 3px 0
+}
+
+.info-card a {
+    color: #70ef8a
+}
+
+.info-card a:hover {
+    text-decoration: underline
+}
+
+.info-card .muted {
+    color: #718097
+}
+
+/* Бейдж «NASA / МАКЕТ» на кнопке слоя */
+.src-badge {
+    margin-left: auto;
+    padding: 1px 6px;
+    border: 1px solid #344055;
+    border-radius: 4px;
+    font: normal 9px 'JetBrains Mono', monospace;
+    letter-spacing: .6px;
+    color: #718097
+}
+
+.src-badge+kbd {
+    margin-left: 0
+}
+
+.src-badge.nasa {
+    color: #77cbb2;
+    border-color: #31564f
+}
+
+/* ==========================================
+   ИИ-панель (интерфейс; API отключён)
+   ========================================== */
+
+.ai-panel {
+    position: fixed;
+    z-index: 7;
+    right: 20px;
+    bottom: 20px;
+    width: min(380px, calc(100vw - 40px));
+    height: min(520px, 70vh);
+    display: none;
+    flex-direction: column;
+    background: #1c1c1c;
+    border: 1px solid #393939;
+    border-radius: 9px;
+    box-shadow: 0 20px 60px #0007
+}
+
+.ai-panel.open {
+    display: flex
+}
+
+.ai-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid #2d2d2d
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 6px;
+    font: 10px 'JetBrains Mono', monospace;
+    color: #718097
+}
+
+.ai-status i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #70ef8a
+}
+
+.ai-status.online i {
+    background: #68c5a7;
+    box-shadow: 0 0 8px #68c5a7
+}
+
+.ai-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 18px;
+    overflow-y: auto
+}
+
+.ai-message {
+    max-width: 86%;
+    padding: 9px 12px;
+    border-radius: 7px;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap
+}
+
+.ai-message.assistant {
+    align-self: flex-start;
+    background: #242424;
+    color: #c2ccdc
+}
+
+.ai-message.user {
+    align-self: flex-end;
+    background: #70ef8a;
+    color: #161616
+}
+
+.ai-message.error {
+    color: #70ef8a
+}
+
+.ai-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 18px 10px
+}
+
+.ai-chip {
+    padding: 5px 10px;
+    border: 1px solid #344055;
+    border-radius: 999px;
+    background: transparent;
+    color: #8d98ac;
+    font: 10px 'JetBrains Mono', monospace
+}
+
+.ai-chip:hover {
+    border-color: #70ef8a;
+    color: #70ef8a
+}
+
+.ai-form {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px 16px;
+    border-top: 1px solid #2d2d2d
+}
+
+.ai-form textarea {
+    flex: 1;
+    min-width: 0;
+    resize: none;
+    padding: 10px 12px;
+    background: #141414;
+    border: 1px solid #303d52;
+    border-radius: 6px;
+    color: #eef2f8;
+    font-size: 12px;
+    outline: none
+}
+
+.ai-form textarea:focus {
+    border-color: #70ef8a
+}

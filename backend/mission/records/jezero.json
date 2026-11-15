@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA24422",
+  "coverage": 360,
+  "source": "https://science.nasa.gov/resource/perseverance-navcams-360-degree-panorama/",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "jezero",
+  "missionName": "Perseverance \u00b7 Jezero",
+  "title": "Perseverance Navcams 360-Degree Panorama",
+  "date": "2021-02-22",
+  "description": "This panorama, taken on Feb. 20, 2021, by the Navigation Cameras, or Navcams, aboard NASA's Perseverance Mars rover, was stitched together from six individual images after they were sent back to Earth.  A key objective for Perseverance's mission on Mars is astrobiology, including the search for signs of ancient microbial life. The rover will characterize the planet's geology and past climate, pave the way for human exploration of the Red Planet, and be the first mission to collect and cache Martian rock and regolith.  Subsequent missions, currently under consideration by NASA in cooperation with ESA (European Space Agency), would send spacecraft to Mars to collect these cached samples from the surface and return them to Earth for in-depth analysis.  The Mars 2020 Perseverance mission is part of NASA's Moon to Mars exploration approach, which includes Artemis missions to the Moon that will help prepare for human exploration of the Red Planet.  https://photojournal.jpl.nasa.gov/catalog/PIA24422",
+  "original": "https://images-assets.nasa.gov/image/PIA24422/PIA24422~orig.jpg",
+  "image": "/api/missions/jezero/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}

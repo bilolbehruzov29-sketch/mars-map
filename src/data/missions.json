@@ -1,0 +1,147 @@
+{
+  "overview": {
+    "lat": 0,
+    "lon": 0,
+    "description": "Global Mars: mean radius about 3,389.5 km, with a surface area comparable to Earth\u2019s land area.",
+    "query": "Mars global view",
+    "rover": null,
+    "name": "Mars overview"
+  },
+  "olympus": {
+    "lat": 18.65,
+    "lon": 226.2,
+    "description": "Olympus Mons is the largest known volcano in the Solar System: about 22 km high and roughly 600 km across.",
+    "query": "Olympus Mons",
+    "rover": null,
+    "name": "Olympus Mons"
+  },
+  "valles": {
+    "lat": -13.9,
+    "lon": 296.2,
+    "description": "Valles Marineris is a canyon system over 4,000 km long and up to 7 km deep.",
+    "query": "Valles Marineris",
+    "rover": null,
+    "name": "Valles Marineris"
+  },
+  "jezero": {
+    "lat": 18.44463,
+    "lon": 77.45088,
+    "description": "Jezero Crater. Coordinates mark the Perseverance landing site, not its current position.",
+    "query": "Jezero crater Perseverance",
+    "rover": "perseverance",
+    "coordinateSource": "https://ntrs.nasa.gov/citations/20210024644",
+    "name": "Perseverance \u00b7 Jezero",
+    "source": "https://science.nasa.gov/mission/mars-2020-perseverance/",
+    "panorama": {
+      "nasaId": "PIA24422",
+      "coverage": 360,
+      "source": "https://science.nasa.gov/resource/perseverance-navcams-360-degree-panorama/",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "curiosity": {
+    "lat": -4.5895,
+    "lon": 137.4417,
+    "name": "Curiosity",
+    "description": "Gale Crater. Coordinates mark the landing site, not the current rover position.",
+    "query": "Curiosity Gale crater",
+    "rover": "curiosity",
+    "source": "https://science.nasa.gov/mission/msl-curiosity/",
+    "panorama": {
+      "nasaId": "PIA16101",
+      "coverage": 360,
+      "source": "https://images.nasa.gov/details/PIA16101",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "spirit": {
+    "lat": -14.5684,
+    "lon": 175.4726,
+    "name": "Spirit",
+    "description": "Gusev Crater. The Spirit landing site.",
+    "query": "Spirit Gusev crater",
+    "rover": "spirit",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+    "panorama": {
+      "nasaId": "PIA05315",
+      "coverage": 360,
+      "source": "https://science.nasa.gov/photojournal/spirit-keeps-rolling/",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "opportunity": {
+    "lat": -1.9462,
+    "lon": -5.4734,
+    "name": "Opportunity",
+    "description": "Meridiani Planum. The Opportunity landing site.",
+    "query": "Opportunity Meridiani Planum",
+    "rover": "opportunity",
+    "source": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/",
+    "panorama": {
+      "nasaId": "PIA16122",
+      "coverage": 360,
+      "source": "https://images.nasa.gov/details/PIA16122",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "insight": {
+    "lat": 4.5024,
+    "lon": 135.6234,
+    "name": "InSight",
+    "description": "Elysium Planitia. Landing site of the InSight geophysical station; the mission has ended.",
+    "query": "InSight Elysium Planitia",
+    "rover": null,
+    "source": "https://science.nasa.gov/mission/insight/",
+    "panorama": {
+      "nasaId": "PIA23140",
+      "coverage": 290,
+      "source": "https://science.nasa.gov/resource/insight-sol-14-panorama/",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "pathfinder": {
+    "lat": 19.13,
+    "lon": -33.22,
+    "name": "Pathfinder / Sojourner",
+    "description": "Ares Vallis. Landing site of Pathfinder and the Sojourner rover.",
+    "query": "Mars Pathfinder Sojourner",
+    "rover": null,
+    "source": "https://science.nasa.gov/mission/mars-pathfinder/",
+    "panorama": {
+      "nasaId": "PIA01005",
+      "coverage": 360,
+      "source": "https://images.nasa.gov/details/PIA01005",
+      "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location."
+    }
+  },
+  "arcadia": {
+    "name": "Arcadia Planitia \u00b7 candidate region",
+    "lat": 40,
+    "lon": -170,
+    "candidate": true,
+    "rover": null,
+    "query": "Mars Arcadia Planitia water ice",
+    "source": "https://www.nasa.gov/solar-system/nasas-treasure-map-for-water-ice-on-mars/",
+    "description": "Illustrative regional centre (40\u00b0N, 170\u00b0W), not an approved landing coordinate. NASA orbital studies identify accessible subsurface ice in Arcadia as relevant to future human exploration. Cold, dust, terrain, radiation and landing hazards still require assessment; proximity to existing rovers is not established."
+  },
+  "gale_study": {
+    "name": "Gale / Mount Sharp \u00b7 science reference",
+    "lat": -4.59,
+    "lon": 137.44,
+    "candidate": true,
+    "rover": null,
+    "query": "Curiosity Mount Sharp",
+    "source": "https://science.nasa.gov/resource/curiositys-proposed-path-up-mount-sharp/",
+    "description": "Science reference near the Curiosity landing region, supported by NASA rover observations. Included for research proximity, not as a NASA-approved human landing site or a confirmed ice resource. Coordinates are an illustrative reference, not a habitat location."
+  },
+  "deuteronilus": {
+    "name": "Deuteronilus Mensae \u00b7 candidate region",
+    "lat": 41,
+    "lon": 22,
+    "candidate": true,
+    "rover": null,
+    "query": "Deuteronilus Mensae ice",
+    "source": "https://ntrs.nasa.gov/citations/20205008958",
+    "description": "Illustrative regional reference near 41\u00b0N, 22\u00b0E, not an approved landing or habitat coordinate. NASA SWIM research identifies glacial networks in this region as matching multiple criteria for accessible subsurface ice. Terrain, cold, radiation, dust and engineering constraints remain unresolved; not near an operating rover."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA23140",
+  "coverage": 290,
+  "source": "https://science.nasa.gov/resource/insight-sol-14-panorama/",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "insight",
+  "missionName": "InSight",
+  "title": "InSight Sol 14 Panorama",
+  "date": "2019-04-11",
+  "description": "NASA's InSight spacecraft captured this panorama of its landing site on Dec. 9, 2018, the 14th Martian day, or sol, of its mission. The 290-degree perspective surveys the rim of the degraded crater InSight landed in, nicknamed \"Homestead Hollow.\"  The panorama is made of 30 individual images that were taken by the spacecraft's Instrument Deployment Camera, located on its robotic arm.  https://photojournal.jpl.nasa.gov/catalog/PIA23140",
+  "original": "https://images-assets.nasa.gov/image/PIA23140/PIA23140~orig.jpg",
+  "image": "/api/missions/insight/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}

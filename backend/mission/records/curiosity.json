@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA16101",
+  "coverage": 360,
+  "source": "https://images.nasa.gov/details/PIA16101",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "curiosity",
+  "missionName": "Curiosity",
+  "title": "Landing Site Panorama, with the Heights of Mount Sharp",
+  "date": "2012-08-27",
+  "description": "This color panorama shows a 360-degree view of the landing site of NASA Curiosity rover, including the highest part of Mount Sharp visible to the rover.",
+  "original": "https://images-assets.nasa.gov/image/PIA16101/PIA16101~orig.jpg",
+  "image": "/api/missions/curiosity/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}

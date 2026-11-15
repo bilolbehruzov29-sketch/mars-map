@@ -1,0 +1,81 @@
+/* Local 3D terrain viewer */
+.terrain-dialog{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:#02050dcc;backdrop-filter:blur(4px)}
+.terrain-dialog[hidden]{display:none}
+body.terrain-open{overflow:hidden}
+.terrain-window{display:flex;flex-direction:column;width:min(1180px,100%);height:min(820px,100%);overflow:hidden;background:var(--panel-solid,#131c2f);border:1px solid var(--line-2,#33416a);border-radius:20px;box-shadow:0 30px 80px #000c}
+.terrain-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 12px 20px;border-bottom:1px solid var(--line,#25314c)}
+.terrain-eyebrow{color:var(--accent,#ff7a45);font:11px var(--mono,monospace);letter-spacing:1.4px}
+.terrain-head h2{margin:2px 0 0;font-size:20px;font-weight:600;letter-spacing:-.3px}
+.terrain-head-actions{display:flex;gap:6px}
+.terrain-head-actions button{height:34px;padding:0 12px;border:1px solid var(--line-2,#33416a);border-radius:999px;background:var(--panel-2,#18223a);color:var(--text,#e8ecf6);font-size:12px;font-weight:600;cursor:pointer}
+.terrain-head-actions button:hover{border-color:var(--accent,#ff7a45);color:var(--accent,#ff7a45)}
+.terrain-close{width:34px;padding:0!important;font-size:20px!important}
+.terrain-stage{position:relative;flex:1;min-height:0;background:radial-gradient(ellipse at 50% 40%,#16203a,#0a0f1c 70%)}
+.terrain-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.terrain-stage canvas:active{cursor:grabbing}
+.terrain-compass{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line-2,#33416a);border-radius:50%;background:#0f1626e6;pointer-events:none}
+.terrain-compass span{display:block;color:var(--accent,#ff7a45);font:700 12px var(--mono,monospace);transition:transform .1s linear}
+.terrain-compass span::before{content:'';display:block;width:0;height:0;margin:0 auto 1px;border:5px solid transparent;border-bottom:8px solid var(--accent,#ff7a45);border-top:0}
+.terrain-readout{position:absolute;left:14px;bottom:14px;padding:6px 12px;border-radius:999px;background:#0f1626e6;color:var(--text,#e8ecf6);font:12px var(--mono,monospace);pointer-events:none}
+.terrain-readout:empty{display:none}
+.terrain-loading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;color:var(--muted,#8e9bb8);font-size:13px;background:#0a0f1c99}
+.terrain-loading[hidden]{display:none}
+.terrain-loading i{width:26px;height:26px;border:3px solid var(--line-2,#33416a);border-top-color:var(--accent,#ff7a45);border-radius:50%;animation:spin .8s linear infinite}
+.terrain-foot{display:grid;grid-template-columns:auto minmax(200px,1fr);gap:10px 20px;align-items:center;padding:12px 20px 14px;border-top:1px solid var(--line,#25314c)}
+.terrain-controls{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.terrain-controls label{display:flex;align-items:center;gap:8px;color:var(--muted,#8e9bb8);font-size:12px}
+.terrain-controls select{height:32px;padding:0 10px;border:1px solid var(--line-2,#33416a);border-radius:8px;background:#0d1424;color:var(--text,#e8ecf6);font-size:12px}
+.terrain-seg{display:flex;align-items:center;gap:4px;padding:3px;border:1px solid var(--line-2,#33416a);border-radius:999px;background:#0d1424}
+.terrain-seg span{padding:0 6px 0 8px;color:var(--muted,#8e9bb8);font-size:12px}
+.terrain-seg button{min-width:34px;height:26px;border:0;border-radius:999px;background:transparent;color:var(--muted,#8e9bb8);font:600 12px var(--mono,monospace);cursor:pointer}
+.terrain-seg button.active{background:var(--accent,#ff7a45);color:#1a0d05}
+.terrain-legend{display:flex;align-items:center;gap:10px;color:var(--muted,#8e9bb8);font:11px var(--mono,monospace)}
+.terrain-legend i{flex:1;height:8px;border-radius:999px;background:linear-gradient(90deg,#1b2a6b,#2e7fb8 20%,#41b6a6 40%,#d9c27a 60%,#e0703a 80%,#f5efe6)}
+.terrain-meta{grid-column:1/-1;margin:0;color:var(--muted,#8e9bb8);font-size:11px;line-height:1.55}
+.terrain-meta b{color:var(--text,#e8ecf6);font-weight:600}
+.terrain-meta a{color:var(--accent-2,#ff9b6b)}
+.terrain-note{color:var(--amber,#ffb547)}
+.terrain-error{color:var(--danger,#ff4d6d)}
+@media (max-width:760px){
+  .terrain-dialog{padding:0}
+  .terrain-window{height:100%;border-radius:0;border:0}
+  .terrain-head{padding:10px 12px}
+  .terrain-head h2{font-size:15px}
+  .terrain-head-actions button:not(.terrain-close){padding:0 9px}
+  .terrain-foot{grid-template-columns:1fr;padding:10px 12px 12px}
+}
+/* Map toolbar button and pick-mode hint */
+.terrain-open-btn{height:32px;padding:0 14px;border:1px solid var(--line-2,#33416a);border-radius:999px;background:var(--panel,#121a2cf0);color:var(--text,#e8ecf6);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--sans,inherit);letter-spacing:0}
+.terrain-open-btn:hover,.terrain-open-btn.active{border-color:var(--accent,#ff7a45);color:var(--accent,#ff7a45)}
+body.picking-terrain .map-stage::after{content:'Click on Mars to open 3D terrain · Esc to cancel';position:absolute;left:50%;top:70px;transform:translateX(-50%);padding:8px 14px;border:1px solid var(--accent,#ff7a45);border-radius:20px;background:#0f1626e6;color:var(--text,#e8ecf6);font-size:12px;pointer-events:none;z-index:9}
+
+/* Realistic mode: sky behind a transparent canvas, conditions panel, time controls */
+.terrain-stage{transition:background .4s ease}
+.terrain-weather{position:absolute;z-index:2;top:14px;left:14px;width:min(360px,calc(100% - 90px));max-height:calc(100% - 70px);overflow:auto;background:#0f1626e8;border:1px solid var(--line-2,#33416a);border-radius:14px;box-shadow:0 12px 30px #0007;backdrop-filter:blur(8px)}
+.terrain-weather-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;padding:10px 14px;border:0;background:none;color:var(--text,#e8ecf6);font-size:13px;font-weight:700;cursor:pointer}
+.terrain-weather-toggle span{color:var(--muted,#8e9bb8);transition:transform .2s}
+.terrain-weather.collapsed .terrain-weather-toggle span{transform:rotate(-90deg)}
+.terrain-weather.collapsed .terrain-weather-body{display:none}
+.terrain-weather-body{padding:0 14px 12px;font-size:12px;line-height:1.5;color:#c3cbe0}
+.terrain-weather dl{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;margin:0}
+.terrain-weather dt{color:var(--muted,#8e9bb8);font-size:11px}
+.terrain-weather dd{margin:0}
+.terrain-weather b{color:var(--text,#e8ecf6)}
+.terrain-muted{margin:8px 0 0;color:var(--muted,#8e9bb8);font-size:11px}
+.terrain-warn{color:var(--amber,#ffb547)}
+.terrain-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.terrain-foot{grid-template-columns:1fr!important}
+.terrain-foot label{display:flex;align-items:center;gap:8px;color:var(--muted,#8e9bb8);font-size:12px}
+.terrain-foot input[type=date],.terrain-foot select{height:32px;padding:0 10px;border:1px solid var(--line-2,#33416a);border-radius:8px;background:#0d1424;color:var(--text,#e8ecf6);font-size:12px;color-scheme:dark}
+.terrain-time{flex:1 1 280px}
+.terrain-time output{min-width:44px;color:var(--text,#e8ecf6);font:600 13px var(--mono,monospace)}
+.terrain-time input{flex:1;accent-color:var(--accent,#ff7a45)}
+.terrain-play{width:34px;height:32px;border:1px solid var(--line-2,#33416a);border-radius:8px;background:var(--panel-2,#18223a);color:var(--accent,#ff7a45);font-size:12px;cursor:pointer}
+.terrain-legend{flex:1 1 220px}
+.terrain-legend[hidden]{display:none}
+.terrain-seg button{padding:0 10px}
+@media (max-width:760px){
+  .terrain-weather{width:calc(100% - 80px)}
+  .terrain-weather dl{grid-template-columns:82px 1fr}
+  .terrain-time{flex-basis:100%}
+}

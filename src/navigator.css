@@ -1,0 +1,80 @@
+/* Navigator: "From → To" card docked at the bottom of the map */
+.nav-navigator{display:inline-flex;align-items:center;gap:6px}
+.nav-navigator span{font-size:11px}
+.nav-navigator.active{color:var(--green)}
+
+.nav-bar{position:absolute;z-index:6;left:50%;bottom:16px;transform:translateX(-50%);width:min(900px,calc(100% - 32px));animation:nav-rise .22s ease-out}
+.nav-bar[hidden]{display:none}
+@keyframes nav-rise{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+/* Free the bottom of the map while the navigator is open. */
+.map-stage.nav-open .globe-caption,.map-stage.nav-open .map-mission-hint,.map-stage.nav-open #detailStatus,.map-stage.nav-open .coordinate-readout{opacity:0;pointer-events:none}
+
+.nav-card{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;padding:16px 46px 16px 16px;background:#0f1626f2;border:1px solid #25314c;border-radius:16px;box-shadow:0 18px 50px #000a;backdrop-filter:blur(8px)}
+
+.nav-points{position:relative;display:flex;flex-direction:column;gap:8px;padding-right:44px}
+.nav-field{position:relative;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 12px;background:#141c2e;border:1px solid #2a2d2a;border-radius:11px;transition:border-color .15s,box-shadow .15s}
+.nav-field:hover{border-color:#3a4a74}
+.nav-field.picking{border-color:var(--green);box-shadow:0 0 0 3px #ff7a4526}
+.nav-dot{flex:none;width:12px;height:12px;border-radius:50%;border:3px solid currentColor;background:#0c1222}
+.nav-field.from .nav-dot{color:#4cc9f0}
+.nav-field.to .nav-dot{color:#ffb547;border-radius:3px}
+.nav-field.set .nav-dot{background:currentColor}
+.nav-line{position:absolute;left:17px;top:38px;height:calc(100% - 76px);border-left:2px dotted #3a4a74;pointer-events:none}
+.nav-select{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;cursor:pointer}
+.nav-field-label{color:#7c867d;font:9px 'JetBrains Mono',monospace;letter-spacing:1.2px;text-transform:uppercase}
+.nav-select select{width:100%;min-width:0;padding:0;border:0;background:transparent;color:#eef5ef;font-size:14px;font-weight:700;text-overflow:ellipsis;cursor:pointer;appearance:none}
+.nav-field:not(.set) .nav-select select{color:#9aa39b;font-weight:500}
+.nav-select select:focus{outline:none}
+.nav-field:focus-within{border-color:#ff7a4588}
+.nav-select option,.nav-select optgroup{background:#151515;color:#e6e6e6}
+.nav-pin{flex:none;display:grid;place-items:center;width:34px;height:34px;border:1px solid #2b3858;border-radius:9px;background:#18223a;color:#ffc2a1;cursor:pointer}
+.nav-pin svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8}
+.nav-pin:hover{background:#202c4a}
+.nav-field.picking .nav-pin{background:var(--green);border-color:var(--green);color:#1a0d05}
+.nav-swap{position:absolute;right:0;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid #333;border-radius:50%;background:#141c2e;color:#d3dad4;font-size:16px;cursor:pointer}
+.nav-swap:hover:not(:disabled){border-color:#ff7a4588;color:var(--green)}
+.nav-swap:disabled{opacity:.35;cursor:default}
+
+.nav-panel{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.nav-message{margin:0;color:#dfe6e0;font-size:15px;line-height:1.45}
+.nav-message b{color:var(--green)}
+.nav-message.warn{color:#ffb36b}
+.nav-keys{margin:8px 0 0;color:#768076;font-size:11px}
+.nav-keys kbd{padding:1px 6px;border:1px solid #3a3a3a;border-bottom-width:2px;border-radius:4px;background:#1a1a1a;color:#d5dcd6;font:10px 'JetBrains Mono',monospace}
+.nav-spin{display:inline-block;width:12px;height:12px;margin-right:10px;border:2px solid #33416a;border-top-color:var(--green);border-radius:50%;vertical-align:-1px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.nav-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.nav-stats div{min-width:0;padding:8px 10px;background:#141c30;border:1px solid #25314c;border-radius:10px}
+.nav-stats span{display:block;color:#7c867d;font:9px 'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+.nav-stats b{display:block;overflow:hidden;color:#f1f8f2;font-size:17px;white-space:nowrap;text-overflow:ellipsis}
+.nav-stats small{display:block;overflow:hidden;color:#8c968d;font-size:10px;white-space:nowrap;text-overflow:ellipsis}
+.nav-alert,.nav-ok{margin:8px 0 0;font-size:11px;line-height:1.45}
+.nav-alert{color:#ffc48f}
+.nav-ok{color:#ffc2a1}
+.nav-actions{display:flex;gap:8px;margin-top:10px}
+.nav-details{flex:1;padding:9px 12px;border:1px solid #ff9b6b;border-radius:8px;background:var(--green);color:#1a0d05;font-size:12px;font-weight:800;cursor:pointer}
+.nav-details:hover{background:#ff9b6b}
+.nav-clear{padding:9px 12px;border:1px solid #333;border-radius:8px;background:#171717;color:#cfd6d0;font-size:12px;font-weight:700;cursor:pointer}
+.nav-clear:hover{border-color:#ff7a4588}
+
+.nav-close{position:absolute;top:10px;right:10px;width:28px;height:28px;border:0;border-radius:50%;background:transparent;color:#8c948d;font-size:20px;line-height:1;cursor:pointer}
+.nav-close:hover{background:#1f1f1f;color:#fff}
+
+@media (max-width:850px){
+  .nav-bar{left:8px;right:8px;bottom:8px;width:auto;transform:none;animation:none}
+  .nav-card{grid-template-columns:1fr;gap:12px;padding:14px 14px 14px}
+  .nav-close{top:6px;right:6px}
+  .nav-points{padding-right:44px}
+  .nav-keys{display:none}
+  .nav-stats b{font-size:15px}
+}
+
+/* Route pins: A / B / numbered stops */
+#routePins{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden}
+.route-pin{position:absolute;top:0;left:0;display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border:2px solid #0b0d0b;border-radius:12px;font:800 12px/1 'JetBrains Mono',monospace;color:#1a0d05;box-shadow:0 4px 12px #000a}
+.route-pin::after{content:'';position:absolute;left:50%;bottom:-7px;width:2px;height:6px;background:inherit;transform:translateX(-50%)}
+.route-pin.from{background:#4cc9f0}
+.route-pin.to{background:#ffb547}
+.route-pin.stop{background:#ffe08a}
+@media (pointer: coarse){.nav-keys{display:none}}

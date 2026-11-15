@@ -1,0 +1,3 @@
+# Netlify: forward the API to the Python server on Render (works for Git deploys and drag-and-drop of dist/).
+/api/*    https://spacemap-mars.onrender.com/api/:splat    200!
+/healthz  https://spacemap-mars.onrender.com/healthz       200!

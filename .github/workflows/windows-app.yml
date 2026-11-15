@@ -1,0 +1,89 @@
+name: Windows app
+
+# Builds MarsMap.exe and the installer MarsMap-Setup.exe (website + Python server) on every push to main,
+# on demand, and for version tags (v1.0.0 → attached to a GitHub release).
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt -r desktop/requirements.txt
+      - run: python -m unittest discover -s backend/tests
+
+      - run: pyinstaller --noconfirm --distpath dist-desktop --workpath build-desktop desktop/MarsMap.spec
+
+      - name: Smoke test the packaged app (server only, no window)
+        shell: pwsh
+        run: |
+          $env:MARSMAP_HEADLESS = '1'
+          $env:DEM_HIRES = '0'
+          $data = Join-Path $env:LOCALAPPDATA 'MarsMap'
+          Remove-Item (Join-Path $data 'last-url.txt') -ErrorAction SilentlyContinue
+          $app = Start-Process -FilePath 'dist-desktop\MarsMap.exe' -PassThru
+          $file = Join-Path $data 'last-url.txt'
+          for ($i = 0; $i -lt 60 -and -not (Test-Path $file); $i++) { Start-Sleep -Seconds 1 }
+          $url = Get-Content $file
+          $base = $url -replace '/#map$', ''
+          (Invoke-WebRequest "$base/healthz").Content
+          if ((Invoke-WebRequest "$base/").StatusCode -ne 200) { throw 'website not served' }
+          if ((Invoke-WebRequest "$base/api/terrain/patch?lat=-4.6&lon=137.4&radiusKm=100").StatusCode -ne 200) { throw 'terrain API failed' }
+          Stop-Process -Id $app.Id -Force
+
+      - name: Build the installer (Inno Setup)
+        shell: pwsh
+        run: |
+          choco install innosetup -y --no-progress
+          $version = if ('${{ github.ref }}' -like 'refs/tags/v*') { '${{ github.ref_name }}'.TrimStart('v') } else { '1.0.0' }
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" "/DMyAppVersion=$version" desktop\installer.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
+
+      - name: Test the installer (silent install, check, uninstall)
+        shell: pwsh
+        run: |
+          Start-Process -FilePath 'dist-desktop\MarsMap-Setup.exe' -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/CURRENTUSER' -Wait
+          $installed = Join-Path $env:LOCALAPPDATA 'Programs\Mars Map\MarsMap.exe'
+          if (-not (Test-Path $installed)) { throw "not installed: $installed" }
+          $uninstaller = Get-ChildItem (Split-Path $installed) -Filter 'unins*.exe' | Select-Object -First 1
+          Start-Process -FilePath $uninstaller.FullName -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART' -Wait
+          for ($i = 0; $i -lt 30 -and (Test-Path $installed); $i++) { Start-Sleep -Seconds 1 }  # the uninstaller relaunches itself from %TEMP%
+          if (Test-Path $installed) { throw 'uninstall left the program behind' }
+          'installer OK'
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MarsMap-windows
+          path: |
+            dist-desktop/MarsMap-Setup.exe
+            dist-desktop/MarsMap.exe
+          if-no-files-found: error
+
+      - name: Attach to release (version tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist-desktop/MarsMap-Setup.exe
+            dist-desktop/MarsMap.exe

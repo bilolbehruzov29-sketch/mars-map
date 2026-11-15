@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0f1c" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="description" content="Interactive NASA map of Mars with terrain-aware routes, expedition planning and computed surface conditions." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://trek.nasa.gov" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>Mars Map — routes, expeditions and NASA data</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#" id="homeLink" aria-label="Mars Map home"><span class="brand-planet" aria-hidden="true"></span><span class="brand-name">Mars<b>Map</b></span></a>
+        <nav class="topnav" aria-label="Main navigation">
+          <button class="nav-link" data-page="map">Map</button>
+          <button class="nav-link nav-navigator" id="openNavigator" aria-controls="navBar" aria-expanded="false" title="Navigator (N)"><span aria-hidden="true">➤</span> Navigator</button>
+          <button class="nav-link" data-page="about">About</button>
+          <a class="nav-link external-link" href="https://www.nasa.gov/" target="_blank" rel="noreferrer">NASA ↗</a>
+        </nav>
+        <button class="coordinates-open" id="openAI">S.A.M <span>✦</span></button>
+        <button class="coordinates-open" id="openCoordinates">Plan expedition <span>＋</span></button>
+      </header>
+
+      <main>
+        <section class="welcome-page page active" id="welcomePage" aria-labelledby="welcomeTitle">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="hero-tag"><i></i> Live NASA data · Mars Trek · MOLA · REMS</span>
+              <h1 id="welcomeTitle" tabindex="-1">Plan a journey<br>across <em>Mars.</em></h1>
+              <p class="hero-lead">Pick two places and get a route that avoids steep cliffs, crater walls and volcano slopes — with travel time, daylight and air pressure along the way. Built on real NASA maps and elevation data.</p>
+              <div class="hero-actions">
+                <button class="hero-primary" id="exploreMars" data-page="map">Open the map <span aria-hidden="true">→</span></button>
+                <a class="hero-secondary" href="#about">How it works</a>
+              </div>
+              <ul class="hero-facts" aria-label="What is inside">
+                <li><b>9</b><span>NASA map layers</span></li>
+                <li><b>12</b><span>mission sites &amp; base regions</span></li>
+                <li><b>A → B</b><span>terrain-aware navigator</span></li>
+              </ul>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="orbit orbit-1"><span class="orbit-label">Navigator</span></div>
+              <div class="orbit orbit-2"><span class="orbit-label">Expeditions</span></div>
+              <div class="orbit orbit-3"><span class="orbit-label">Road conditions</span></div>
+              <div class="planet"><span class="planet-route"></span></div>
+              <div class="hero-card">
+                <span>Curiosity → InSight</span>
+                <b>580 km · 7.3 sols</b>
+                <small>max slope 2.5° · daylight 12 h</small>
+              </div>
+            </div>
+          </div>
+          <footer class="hero-footer"><span>Mars Map · team Dushanbe</span><a href="https://trek.nasa.gov/mars/" target="_blank" rel="noreferrer">Imagery: NASA Mars Trek ↗</a></footer>
+        </section>
+
+        <section class="map-page page" id="mapPage">
+          <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-controls="mapSidebar" aria-expanded="true" title="Hide panel"><span aria-hidden="true">‹</span></button>
+          <aside class="sidebar" id="mapSidebar"><div class="side-section"><div class="section-heading">EXPLORATION</div><h2>Space missions</h2><button class="mission" data-mission="overview"><span class="mission-icon">⌖</span><span><b>Mars overview</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="olympus"><span class="mission-icon">⌖</span><span><b>Olympus Mons</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="valles"><span class="mission-icon">⌖</span><span><b>Valles Marineris</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="jezero"><span class="mission-icon">⌖</span><span><b>Perseverance · Jezero</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="curiosity"><span class="mission-icon">⌖</span><span><b>Curiosity</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="spirit"><span class="mission-icon">⌖</span><span><b>Spirit</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="opportunity"><span class="mission-icon">⌖</span><span><b>Opportunity</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="insight"><span class="mission-icon">⌖</span><span><b>InSight</b><small>NASA mission / region</small></span></button><button class="mission" data-mission="pathfinder"><span class="mission-icon">⌖</span><span><b>Pathfinder / Sojourner</b><small>NASA mission / region</small></span></button><div id="missionInfo" class="info-card">Select a mission to focus the map.</div></div><div class="side-section"><h2>Future exploration</h2><p class="side-hint">Research candidates, not certified safe landing sites.</p><button class="mission" data-mission="arcadia"><span class="mission-icon">◇</span><span><b>Arcadia Planitia · candidate region</b><small>Evidence and limitations ↗</small></span></button><button class="mission" data-mission="gale_study"><span class="mission-icon">◇</span><span><b>Gale / Mount Sharp · science reference</b><small>Evidence and limitations ↗</small></span></button></div>
+            
+
+
+
+
+            <div class="side-section layers-section">
+              <div class="section-heading"><span>SURFACE DATA</span><span class="layer-count">9 SECTIONS</span></div>
+              <h2>Map layers</h2>
+              <p class="side-hint">Choose a NASA dataset to explore the surface.</p>
+              <div class="layer-list" id="layerList"><button class="layer-button" data-layer="planet"><i class="layer-swatch optical"></i><span>NASA surface</span><kbd>00</kbd></button>
+                <button class="layer-button active" data-layer="optical"><i class="layer-swatch optical"></i><span>Optical</span><kbd>01</kbd></button>
+                <button class="layer-button" data-layer="thermal"><i class="layer-swatch thermal"></i><span>Thermal infrared</span><kbd>02</kbd></button>
+                <button class="layer-button" data-layer="spectral"><i class="layer-swatch spectral"></i><span>Spectral</span><kbd>03</kbd></button>
+                <button class="layer-button" data-layer="topographic"><i class="layer-swatch topographic"></i><span>Topography</span><kbd>04</kbd></button>
+                <button class="layer-button" data-layer="geophysical"><i class="layer-swatch geophysical"></i><span>MOLA roughness</span><kbd>05</kbd></button>
+                <button class="layer-button" data-layer="atmospheric"><i class="layer-swatch atmospheric"></i><span>TES dust · archive</span><kbd>06</kbd></button>
+                <button class="layer-button" data-layer="radiation"><i class="layer-swatch radiation"></i><span>TES thermal inertia</span><kbd>07</kbd></button>
+                <button class="layer-button" data-layer="chemical"><i class="layer-swatch chemical"></i><span>TES minerals</span><kbd>08</kbd></button>
+              </div>
+              <div class="info-card" id="layerInfo"></div>
+            </div>
+            
+<button class="mission" data-mission="deuteronilus"><span class="mission-icon">◇</span><span><b>Deuteronilus Mensae · candidate region</b><small>Ice-resource research · NASA</small></span></button><div class="sidebar-footer"><span class="status-pulse"></span> <span id="dataStatusText">NASA · LOADING</span></div>
+          </aside>
+
+          <section class="globe-area"><div class="map-stage">
+            <section class="nav-bar" id="navBar" aria-label="Navigator" hidden></section>
+            <div class="globe-toolbar">
+              <div><span class="eyebrow">PLANETARY SYSTEM / NASA / MARS TREK</span><h1>Mars <span class="live-tag">NASA DATA</span></h1></div>
+              <div class="view-controls">
+                <button type="button" class="terrain-open-btn" id="terrain3dButton" title="3D terrain: click a point on Mars (or press T over the map)">⛰ 3D terrain</button>
+                <div class="mode-switch">
+                  <button class="mode-button active" data-view="3d">3D</button>
+                  <button class="mode-button" data-view="2d">2D</button>
+                </div>
+                <button id="resetView" title="Reset view">⟲</button>
+                <span>DRAG · ZOOM</span>
+              </div>
+            </div>
+            <div id="globe" aria-label="Interactive Mars map"></div><div id="missionHotspots" aria-label="Mission locations"></div><div id="routePins" aria-hidden="true"></div>
+            <div class="globe-caption"><span class="caption-dot"></span><span id="activeLayerName">OPTICAL LAYER</span><span class="caption-divider"></span><span>Drag to explore · Scroll to zoom</span></div>
+            <p class="map-mission-hint">Select a mission point to inspect NASA panoramas.</p><div id="detailStatus" role="status">NASA · loading base map…</div><div class="coordinate-readout" id="coordinateReadout">LATITUDE <b>—</b> LONGITUDE <b>—</b></div>
+</div><section id="weatherFooter" class="weather-card" aria-labelledby="weatherFooterTitle"><header><button type="button" class="weather-toggle" id="weatherToggle" aria-expanded="true" aria-controls="weatherInfo"><h2 id="weatherFooterTitle"><span class="weather-indicator"></span>Mars weather <small>NASA · REMS</small></h2><span class="weather-chevron" aria-hidden="true">⌄</span></button><button id="refreshWeather" type="button" aria-label="Refresh weather">↻</button></header><div id="weatherInfo" aria-live="polite"></div><a href="https://mars.nasa.gov/layout/embed/image/mslweather/" target="_blank" rel="noreferrer">Official NASA report ↗</a></section></section>
+        </section>
+
+        <section class="about-page page" id="aboutPage">
+          <div class="about-content">
+            <span class="eyebrow">SPACE EXPLORATION INTERFACE</span>
+            <h1>Explore Mars<br><em>from a new perspective.</em></h1>
+            <p class="about-lead">Mars Map brings NASA imagery, historical mission sites, and planetary datasets into one interactive Mars map.</p>
+            <div class="about-grid">
+              <article><span>01 / VISUALIZATION</span><h3>One planet. Many layers.</h3><p>Switch NASA datasets to discover the different ways scientists study Mars.</p></article>
+              <article><span>02 / NAVIGATION</span><h3>Navigator &amp; expeditions</h3><p>Route from A to B or across many bases. Paths bend around steep terrain on NASA MOLA elevation data, with a sol-by-sol timeline.</p></article>
+              <article><span>03 / EXPLORATION</span><h3>Missions</h3><p>Visit historic landing sites and explore the regions that shaped our understanding of the Red Planet.</p></article>
+            </div>
+            <p class="about-note">Maps are provided by NASA Mars Trek WMTS. Missing coverage means no measurements. Images are archival and weather observations are local. Expeditions route each leg around steep terrain on coarse MOLA topography and estimate daylight, sunlight and air pressure along the way; safety remains unverified. TES thermal inertia is provided as an additional NASA dataset.</p>
+            <button class="primary-button" id="backToMap">Back to map <span>→</span></button>
+          </div>
+        </section>
+      </main><section class="panorama-dialog" id="panoramaDialog" role="dialog" aria-modal="true" aria-labelledby="panoramaTitle" hidden><header><div><span class="eyebrow">NASA · SURFACE ARCHIVE</span><h2 id="panoramaTitle">Mission panorama</h2></div><button id="closePanorama" aria-label="Close panorama">Back to map ×</button></header><div class="panorama-stage"><canvas id="panoramaCanvas" tabindex="0" aria-label="Panorama viewer. Drag to look around; use arrow keys to pan and plus or minus to zoom."></canvas><p id="panoramaStatus" role="status">Loading NASA panorama…</p></div><footer><p id="panoramaDetails"></p><div><button id="panoramaLeft" aria-label="Look left">←</button><button id="panoramaZoomIn" aria-label="Zoom into panorama">+</button><button id="panoramaZoomOut" aria-label="Zoom out of panorama">−</button><button id="panoramaRight" aria-label="Look right">→</button><a id="panoramaSource" target="_blank" rel="noreferrer">NASA source ↗</a><a id="panoramaOriginal" target="_blank" rel="noreferrer">Original image ↗</a></div></footer></section>
+
+      <div class="drawer-backdrop" id="drawerBackdrop"></div>
+      <aside class="coordinate-drawer expedition-drawer" id="coordinateDrawer" aria-hidden="true" aria-labelledby="expeditionTitle" inert>
+        <div class="drawer-heading"><div><span class="eyebrow">MISSION PLANNER</span><h2 id="expeditionTitle">Expedition</h2></div><button id="closeCoordinates" class="close-button" aria-label="Close">×</button></div>
+        <p class="drawer-description">Plan a traverse from base to base. Every leg is routed around steep terrain on NASA MOLA topography, with a sol-by-sol timeline and computed road conditions.</p>
+        <form id="expeditionForm" novalidate>
+          <div class="stops-head"><label>Stops <span>BASE · LAT / LON</span></label><button type="button" id="pickOnMap" class="secondary-button small">Pick on map</button></div>
+          <ol id="stopList" class="stop-list"></ol>
+          <button type="button" id="addStop" class="link-button add-stop">+ Add stop</button>
+          <label class="check"><input type="checkbox" id="roundTrip" name="roundTrip"> Return to the first base</label>
+          <div class="option-grid">
+            <label for="vehicle">Vehicle
+              <select id="vehicle" name="vehicle">
+                <option value="crewed" selected>Pressurized crew rover</option>
+                <option value="open">Open rover (LRV-class)</option>
+                <option value="robotic">Robotic rover</option>
+              </select></label>
+            <label for="maxSlope">Max slope, °<input id="maxSlope" name="maxSlope" type="number" min="2" max="30" step="0.5" value="15"></label>
+            <label for="departure">Departure<input id="departure" name="departure" type="date" min="2000-01-01" max="2100-12-31"></label>
+            <label for="stopSols">Stay at stops, sols<input id="stopSols" name="stopSols" type="number" min="0" max="60" step="0.5" value="1"></label>
+          </div>
+          <button class="primary-button full-button" type="submit">Plan expedition <span>→</span></button>
+        </form>
+        <div class="route-result" id="routeResult" aria-live="polite">Choose bases or pick points on the map, then plan the expedition.</div>
+      </aside>
+
+      <!-- S.A.M · Gemini via a server-only proxy -->
+      <aside class="ai-panel" id="aiPanel" aria-hidden="true" aria-label="S.A.M exploration companion">
+        <div class="ai-head">
+          <div><span class="eyebrow">SAM</span><div class="ai-status" id="aiStatus"><i></i><span>Not configured</span></div></div>
+          <button id="closeAI" class="close-button" aria-label="Close">×</button>
+        </div>
+        <div class="ai-messages" id="aiMessages" aria-live="polite"></div>
+        <div class="ai-chips">
+          <button type="button" class="ai-chip" data-prompt="Explain the selected NASA layer.">This layer</button>
+          <button type="button" class="ai-chip" data-prompt="What is interesting about the selected region?">This region</button>
+          <button type="button" class="ai-chip" data-prompt="Summarise my planned expedition and its main risks.">My expedition</button>
+        </div>
+        <form class="ai-form" id="aiForm">
+          <textarea id="aiInput" aria-label="Message S.A.M" maxlength="4000" rows="2" placeholder="Ask S.A.M about Mars…"></textarea>
+          <button class="primary-button" type="submit" aria-label="Send message to S.A.M">→</button>
+        </form>
+      </aside>
+    </div>
+      <script type="module" src="/main.js"></script>
+  </body>
+</html>

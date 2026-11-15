@@ -1,0 +1,14 @@
+{
+  "nasaId": "PIA01005",
+  "coverage": 360,
+  "source": "https://images.nasa.gov/details/PIA01005",
+  "locationNote": "Historical panorama from this mission\u2019s exploration region; the marker denotes the landing site. It is not a live view or an exact current rover location.",
+  "missionId": "pathfinder",
+  "missionName": "Pathfinder / Sojourner",
+  "title": "360-degree Color Panorama",
+  "date": "1997-11-04",
+  "description": "360-degree Color Panorama",
+  "original": "https://images-assets.nasa.gov/image/PIA01005/PIA01005~orig.jpg",
+  "image": "/api/missions/pathfinder/panorama/image",
+  "credit": "NASA/JPL-Caltech \u00b7 NASA Image and Video Library"
+}
